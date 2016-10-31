@@ -130,5 +130,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 			return this.getEmail().compareTo(o.getEmail());
 		return this.getAddress().compareTo(o.getAddress());
 	}
+	
+	public Task clone() {
+	    Task clone =  new Task(this.name.clone(), this.phone.clone(), this.email.clone(), this.address.clone(), this.tags);
+	    if (this.isComplete) {
+		clone.isComplete = true;
+	    }
+	    return clone;
+	}
 
 }

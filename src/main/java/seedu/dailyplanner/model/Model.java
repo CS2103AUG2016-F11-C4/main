@@ -41,9 +41,8 @@ public interface Model {
     void updateFilteredPersonListByDate(Set<String> keywords);
     
     /**
-     * Gets the command that will revert the last change that was made. The command is
-     * removed from history.
+     * Reverts to previous state of model
      */
-    Command getReverseCommandFromHistory();
+    void revertState();
 
 }

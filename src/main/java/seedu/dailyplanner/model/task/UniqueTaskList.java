@@ -119,4 +119,16 @@ public class UniqueTaskList implements Iterable<Task> {
     public int hashCode() {
 	return internalList.hashCode();
     }
+    
+    public UniqueTaskList clone() {
+	UniqueTaskList clone = new UniqueTaskList();
+	for (Task t : internalList) {
+	    Task tCopy = t.clone();
+	    try {
+		clone.add(tCopy);
+	    } catch (DuplicatePersonException e) {
+	    }
+	}
+	return clone;
+    }
 }

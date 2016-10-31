@@ -19,8 +19,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        commandToExecute = model.getReverseCommandFromHistory();
-        commandToExecute.execute();
+        model.revertState();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
         
    

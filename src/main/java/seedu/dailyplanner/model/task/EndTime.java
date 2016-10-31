@@ -65,5 +65,13 @@ public class EndTime implements Comparable<EndTime> {
 	public int compareTo(EndTime o) {
 		return this.intValue - o.intValue;
 	}
+	
+	public EndTime clone() {
+	    try {
+		return new EndTime(value);
+	    } catch (IllegalValueException e) {
+	    }
+	    return null;
+	}
 
 }

@@ -89,6 +89,9 @@ public class Parser {
 
 	case CompleteCommand.COMMAND_WORD:
 	    return prepareComplete(arguments);
+	    
+	case UndoCommand.COMMAND_WORD:
+	    return new UndoCommand();
 
 	case ShowCommand.COMMAND_WORD:
 	    if (arguments.equals(""))

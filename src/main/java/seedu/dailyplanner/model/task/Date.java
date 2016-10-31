@@ -75,4 +75,12 @@ public class Date implements Comparable<Date> {
 			return this.month - o.month;
 		return this.day - o.day;
 	}
+	
+	public Date clone() {
+	    try {
+		return new Date(value);
+	    } catch (IllegalValueException e) {
+	    }
+	    return null;
+	}
 }

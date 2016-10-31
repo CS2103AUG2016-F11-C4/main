@@ -18,10 +18,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueTaskList persons;
     private final UniqueTagList tags;
+    public ArrayList<AddressBook> addressBookHistory;
 
     {
         persons = new UniqueTaskList();
         tags = new UniqueTagList();
+        addressBookHistory = new ArrayList<AddressBook>();
     }
 
     public AddressBook() {}
@@ -77,8 +79,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Task p) throws UniqueTaskList.DuplicatePersonException {
-        syncTagsWithMasterList(p);
+	syncTagsWithMasterList(p);
         persons.add(p);
+        
     }
 
     /**
@@ -106,6 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
         if (persons.remove(key)) {
+            addressBookHistory.add(this.clone());
             return true;
         } else {
             throw new UniqueTaskList.PersonNotFoundException();
@@ -114,6 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     
     public void markTaskAsComplete(int targetIndex) throws UniqueTaskList.PersonNotFoundException {
 	persons.complete(targetIndex);
+	addressBookHistory.add(this.clone());
     }
 
 //// tag-level operations
@@ -163,5 +168,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(persons, tags);
+    }
+    
+    public AddressBook clone() {
+	return new AddressBook(persons.clone(), tags);
+    }
+    
+    public void revertToLast() {
+	AddressBook prev = addressBookHistory.get(addressBookHistory.size() - 2);
+	resetData(prev.getPersonList(), prev.getTagList());
+	
+    }
+
+    public void saveState() {
+	addressBookHistory.add(this.clone());
+	
     }
 }

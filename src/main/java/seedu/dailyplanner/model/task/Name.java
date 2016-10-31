@@ -49,5 +49,13 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
+    
+    public Name clone() {
+	try {
+	    return new Name(this.fullName);
+	} catch (IllegalValueException e) {
+	}
+	return null;
+    }
 
 }

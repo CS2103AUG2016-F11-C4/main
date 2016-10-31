@@ -66,5 +66,13 @@ public class StartTime implements Comparable<StartTime> {
 	public int compareTo(StartTime o) {
 		return this.intValue - o.intValue;
 	}
+	
+	public StartTime clone() {
+	    try {
+		return new StartTime(value);
+	    } catch (IllegalValueException e) {
+	    }
+	    return null;
+	}
 
 }
