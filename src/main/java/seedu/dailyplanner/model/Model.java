@@ -3,6 +3,7 @@ package seedu.dailyplanner.model;
 import java.util.Set;
 
 import seedu.dailyplanner.commons.core.UnmodifiableObservableList;
+import seedu.dailyplanner.hotkeys.Shortcuts;
 import seedu.dailyplanner.logic.commands.Command;
 import seedu.dailyplanner.model.task.ReadOnlyTask;
 import seedu.dailyplanner.model.task.Task;
@@ -45,5 +46,6 @@ public interface Model {
      * removed from history.
      */
     Command getReverseCommandFromHistory();
+    Shortcuts getPreviousQuery(); 
 
 }

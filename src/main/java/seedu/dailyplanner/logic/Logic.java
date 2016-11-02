@@ -2,6 +2,7 @@ package seedu.dailyplanner.logic;
 
 import javafx.collections.ObservableList;
 import seedu.dailyplanner.logic.commands.CommandResult;
+import seedu.dailyplanner.model.Model;
 import seedu.dailyplanner.model.task.ReadOnlyTask;
 
 /**
@@ -17,5 +18,7 @@ public interface Logic {
 
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
+    
+    Model getModel();
 
 }

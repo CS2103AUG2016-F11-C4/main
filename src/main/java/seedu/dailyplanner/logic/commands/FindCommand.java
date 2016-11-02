@@ -23,6 +23,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
+    	model.getPreviousQuery().setQuery("find");
         model.updateFilteredPersonList(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
     }

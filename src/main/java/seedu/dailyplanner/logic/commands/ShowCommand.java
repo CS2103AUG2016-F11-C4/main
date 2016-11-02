@@ -24,7 +24,8 @@ public class ShowCommand extends Command {
 
     @Override
     public CommandResult execute() {
-	if (keywords == null) {
+    	model.getPreviousQuery().setQuery("show");
+	if (keywords == null) {		
 	    model.updateFilteredListToShowAll();
 	    return new CommandResult(String.format(MESSAGE_SUCCESS, "all"));
 	} else {

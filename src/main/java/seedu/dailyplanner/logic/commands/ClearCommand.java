@@ -15,6 +15,7 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
+    	model.getPreviousQuery().setQuery("clear");
         assert model != null;
         model.resetData(AddressBook.getEmptyAddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

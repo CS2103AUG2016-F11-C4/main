@@ -19,7 +19,9 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final Parser parser;
+    
+
+	private final Parser parser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -38,4 +40,10 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
+    
+    @Override
+    public Model getModel() {
+		return model;
+	}
+    
 }

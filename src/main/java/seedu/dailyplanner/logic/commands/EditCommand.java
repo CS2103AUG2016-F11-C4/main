@@ -103,6 +103,7 @@ import seedu.dailyplanner.model.task.UniqueTaskList.PersonNotFoundException;
             
 
 	        try {
+	        	model.getPreviousQuery().setQuery("edit");
 	            model.deletePerson(taskToEdit);
 	            model.addPerson(toAdd);
 	            

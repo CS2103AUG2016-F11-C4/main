@@ -6,6 +6,7 @@ import seedu.dailyplanner.commons.core.LogsCenter;
 import seedu.dailyplanner.commons.core.UnmodifiableObservableList;
 import seedu.dailyplanner.commons.events.model.AddressBookChangedEvent;
 import seedu.dailyplanner.commons.util.StringUtil;
+import seedu.dailyplanner.hotkeys.Shortcuts;
 import seedu.dailyplanner.logic.commands.Command;
 import seedu.dailyplanner.logic.commands.DeleteCommand;
 import seedu.dailyplanner.model.task.ReadOnlyTask;
@@ -27,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredPersons;
     private ArrayList<Command> history;
+    private Shortcuts commandKey;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -43,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(addressBook.getPersons());
         history = new ArrayList<Command>();
         history.add(new DeleteCommand(1));
+        commandKey = new Shortcuts();
     }
 
     public ModelManager() {
@@ -54,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(addressBook.getPersons());
         history = new ArrayList<Command>();
         history.add(new DeleteCommand(1));
+        commandKey = new Shortcuts();
     }
 
     @Override
@@ -107,6 +111,12 @@ public class ModelManager extends ComponentManager implements Model {
             history.remove(history.size()-1);
          
         return command;
+        
+    }
+    
+    public synchronized Shortcuts getPreviousQuery() {
+        	
+        return commandKey;
         
     }
     

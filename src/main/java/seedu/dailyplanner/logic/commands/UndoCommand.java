@@ -19,6 +19,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() {
+    	model.getPreviousQuery().setQuery("undo");
         commandToExecute = model.getReverseCommandFromHistory();
         commandToExecute.execute();
         return new CommandResult(String.format(MESSAGE_SUCCESS));

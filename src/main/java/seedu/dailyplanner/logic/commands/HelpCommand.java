@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
+    	model.getPreviousQuery().setQuery("help");
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }

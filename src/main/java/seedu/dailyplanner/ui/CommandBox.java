@@ -12,8 +12,14 @@ import seedu.dailyplanner.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.dailyplanner.commons.util.FxViewUtil;
 import seedu.dailyplanner.logic.Logic;
 import seedu.dailyplanner.logic.commands.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import seedu.dailyplanner.hotkeys.*;
+import seedu.dailyplanner.commons.events.model.*;
 
 import java.util.logging.Logger;
+
+import javax.swing.JTextField;
 
 public class CommandBox extends UiPart {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -29,6 +35,7 @@ public class CommandBox extends UiPart {
     @FXML
     private TextField commandTextField;
     private CommandResult mostRecentResult;
+    private JTextField jCommandTextField;
 
     public static CommandBox load(Stage primaryStage, AnchorPane commandBoxPlaceholder,
             ResultDisplay resultDisplay, Logic logic) {
@@ -46,7 +53,9 @@ public class CommandBox extends UiPart {
 
     private void addToPlaceholder() {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        placeHolderPane.getChildren().add(commandTextField);
+        placeHolderPane.getChildren().add(commandTextField);       
+        	
+        
         FxViewUtil.applyAnchorBoundaryParameters(commandPane, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
@@ -109,6 +118,10 @@ public class CommandBox extends UiPart {
      */
     private void setStyleToIndicateIncorrectCommand() {
         commandTextField.getStyleClass().add("error");
+    }
+    public void keyPressed(KeyEvent pressed){
+    	jCommandTextField.addKeyListener(this);
+    	commandTextField.setText(logic.getModel().getPreviousQuery().keyPressed(pressed));
     }
 
 }
